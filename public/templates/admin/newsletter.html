@@ -1,0 +1,97 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">All Subscriber</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- /.row -->
+<div ng-include = "'/templates/admin/ui-elements/flashMessage.html'"></div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               List
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                     <div "col-lg-12">
+                     <p>Search :<input type="text" Placeholder="Search By  Email " ng-model="search"></p>
+                </div>
+                    <table ng-table="subscriberTable" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Email</th>
+                                 <th>Subscription Date</th>
+                               <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in $data | filter:search">
+                                <td>{{$index+1}}</td>
+                                <td>{{x.email}}</td>
+                              <td>{{x.createdDate | date :" MM/dd/y"}}</td>
+                              <td><a class="btn btn-link" data-toggle="modal" ng-click="getSubsEmail(x.email)" data-target="#myModal">Send Message</a>
+                         <div class="modal fade" id="myModal" role="dialog">
+                              <div class="modal-dialog">
+                                   <!-- Modal content-->
+                                   <div class="modal-content">
+                                        <div class="modal-header">
+                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                             <h4 class="modal-title">Send Mail To Subscriber User</h4>
+                                        </div>
+                                        <div class="modal-body">
+                         <div class="row">
+                         <div class="col-md-12">
+                         <div class="panel panel-default">
+                              <div class="panel-heading">
+                                   <h3 class="text-center"><strong>Send Email </strong></h3>
+                              </div>
+                              <div class="panel-body">
+
+                                   <div class="">
+                                        <form  name="form"   novalidate>
+                                             <div class="form-group">
+                                             <label> To</label>
+                                             <!-- {{email}} -->
+                                             <input type="text" class="form-control"  name="modelname" ng-model="email">
+
+                                        </div>
+                                           <div class="form-group">
+                                             <label> Message </label>
+                                             <textarea class="form-control" placeholder="Write here  .. " name="desc" ng-model="message" ></textarea>
+                                                </h6>
+                                        </div>
+                                           <!-- <button type="submit" class="btn btn-default" ng-disabled="form.$invalid" ng-click="savebrand(brand);">Save </button> -->
+                                        </form>
+                                        &nbsp;&nbsp;&nbsp;<button type="button" style="float: right;" class="btn btn-default" data-dismiss="modal">Close</button>
+                         <button type="button" class="btn btn-success"  style="float: right;" ng-disabled="form.$invalid" ng-click="sendSubscribersMsg(message,email)" data-dismiss="modal">Send</button>&nbsp;&nbsp;&nbsp;
+                              </div>
+
+                         </div>
+                         </div>
+                         </div>
+                         </div>
+                         <!-- <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                         </div> -->
+                         </div>
+                         </div>
+                         </div>
+                    </div>
+</td>
+                         </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+</div>
+<!-- /.row -->

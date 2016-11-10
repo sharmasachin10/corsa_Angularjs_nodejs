@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <p>
+                     <div ng-include = "'/elements/flashMessage.html'"></div>
+                </p>
+
+                <div class="panel-body">
+                    <form name = "form" ng-submit = "login()" novalidate>
+                        <fieldset>
+                            <div class="form-group">
+
+                                <input type="email" autocapitalize="off" tabindex="2"  id="username" ng-model = "User.email"  name="email"  placeholder="Enter your Email" class="form-control required" required/>
+
+                                <span style="color:red" ng-show="form.email.$dirty && form.email.$invalid">
+                                   <span ng-show="form.email.$error.required">Email is required.</span>
+                                   <span ng-show="form.email.$error.email">Invalid email address.</span>
+                                </span>
+
+                            </div>
+                            <div class="form-group">
+                                <!-- <input class="form-control" placeholder="Password" name="password" type="password" value=""> -->
+                                <input class = "form-control" tabindex="3" id="password" type="password" ng-model ="User.password" name="password" id="data_password"  minlength = "6" maxlength = "10" placeholder="Enter your Password"  required />
+                                <!-- <div ng-messages="form.password.$error" ng-if="form.password.$touched || form.$submitted">
+                                    <div>Enter The Correct Pasword</div>
+                                </div> -->
+                                <span style="color:red" ng-show="form.password.$dirty && form.password.$invalid">
+                                     <span ng-show="form.password.$error.required">Password is  required.</span>
+                                     <span ng-show="form.password.$error.minlength">Password is too short.</span>
+                                </span>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                </label>
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <button tabindex="4" id="submit" type="submit" ng-disabled="form.$invalid" class="btn btn-lg btn-success btn-block">Log in</button>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> Manage Booking  </h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- /.row -->
+<div ng-include = "'/templates/admin/ui-elements/flashMessage.html'"></div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               List
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                     <div "col-lg-12">
+                     <p>Search :<input type="text" Placeholder="Search here.. " ng-model="search"></p>
+                </div>
+                         <div ng-if="orders != ''" >
+					<div class="table-responsive trip-cls-div">
+                    <table ng-table="bookingTable"  class="table table-hover table-bordered " id="">
+                        <thead>
+                            <tr>
+                                 <th>#</th>
+                                <th>Invoice</th>
+                               <th>Car Owner</th>
+
+                                <th>Image</th>
+                                <th>Car Name</th>
+                                <th>Payment Status</th>
+                                <th>Amount($)</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Booking Date</th>
+                                <th>Booked By</th>
+
+
+                                <!-- <th>Action</th> -->
+                        </thead>
+                        <tbody>
+
+                            <tr class="odd gradeX" ng-repeat="order in $data | filter:search">
+                                 <td>{{$index+1}}</td>
+                                <td ng-if="order.transactionId.invoice">{{order.transactionId.invoice}}</td>
+                                <td ng-if="!order.transactionId.invoice"><b><center>---</center></b></td>
+                                <td ng-if="order.vehicleId.userId.fullname"><a ui-sref="dashboard.profile({refId: order.vehicleId.userId._id})">{{order.vehicleId.userId.fullname}}</a></td>
+                                <td ng-if="!order.vehicleId.userId.fullname"><b><center>---</center></b></td>
+                                <td>
+                                     <img ng-if="order.vehicleId.gallery.photos " ng-src="{{order.vehicleId.gallery.path + order.vehicleId.gallery.photos[0]}}" style="height:50px; width:50px;">
+                                     <img ng-if="!order.vehicleId.gallery.photos" src="images/carthin.png" style="height:50px; width:50px;">
+                                 </td>
+
+                                <td ng-if="order.vehicleId.specifications.make"><a ui-sref="dashboard.carInfo({vehicleId: order.vehicleId._id})">{{order.vehicleId.specifications.make}} {{order.vehicleId.specifications.model}}  {{order.vehicleId.specifications.year}}</a> </td>
+                                <td ng-if="!order.vehicleId.specifications.make"><b><center>---</center></b></td>
+                                <td ng-if="order.transactionId.paymentStatus">{{order.transactionId.paymentStatus}}</td>
+                                <td ng-if="!order.transactionId.paymentStatus"><b><center>---</center></b></td>
+                                <td ng-if="order.transactionId.amount">{{order.transactionId.amount}}</td>
+                                <td ng-if="!order.transactionId.amount"><b><center>---</center></b></td>
+                                <td ng-if="order.startDate">{{order.startDate | date : 'short'}}</td>
+                                <td ng-if="!order.startDate"><b><center>---</center></b></td>
+                                <td ng-if="order.endDate">{{order.endDate | date : 'short'}}</td>
+                                <td ng-if="!order.endDate"><b><center>---</center></b></td>
+                                <td ng-if="order.transactionId.timeStamp">{{order.transactionId.timeStamp | date : 'short'}}</td>
+                                <td ng-if="!order.transactionId.timeStamp"><b><center>---</center></b></td>
+
+                                <td ng-if="!order.userId.fullname"><b><center>---</center></b></td>
+                                 <td ng-if="order.userId.fullname"><a class="btn btn-link" ng-click="getBookedUser(order.userId.fullname,order.userId.profile.path,order.userId.profile.photo,order.userId.profile.description,order.userId.email)" data-toggle="modal" data-target="#myModal">{{order.userId.fullname}}<a/>
+
+                                      <div class="modal fade" id="myModal" role="dialog">
+                                           <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                     <div class="modal-header">
+                                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                          <h4 class="modal-title">User Information</h4>
+                                                     </div>
+                                                     <div class="modal-body">
+
+
+                                                     <div class="row">
+                                                          <div class="col-md-12">
+                                                               <div class="panel panel-default">
+                                                                    <div class="panel-heading">
+                                                                         <h3 class="text-center"><strong>{{name}} </strong></h3>
+                                                                    </div>
+
+                                                               </div>
+
+                                                          </div>
+                                                     </div>
+                                        <div class="row">
+                                                 <div class="col-md-6">
+                                                  <div class="panel panel-default">
+                                                  <div class="panel-heading">
+                                                       <img ng-if="photo" ng-src="{{path + photo}}" style="height:200px; width:200px;">
+                                                       <img ng-if="!photo" src="images/default_icon.png" style="height:200px; width:200px;">
+                                                    </div>
+
+                                                  </div>
+
+                                                  </div>
+                                                   <div class="col-md-6">
+                                                   <div class="panel panel-default">
+                                                  <div class="panel-heading">
+                                                       <h5><lable>Name:</lable><b>{{name}}</b></h5>
+                                                       <h5><lable>Email:</lable><b>{{email}}</b></h5>
+
+                                                  </div>
+
+                                                 </div>
+
+                                             </div>
+                                         </div>
+
+                                              </div>
+
+                                          </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                 </td>
+
+
+                                </tr>
+
+                        </tbody>
+                    </table>
+					   </div>
+               </div>
+                    <div ng-if = "orders == ''" class="alert alert-info">
+                          <div class="panel-heading" style="text-align: center; font-size: 25px;"> No Trip Found Yet </div>
+                       </div>
+
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+    </div>
+    </div>
+    </div>

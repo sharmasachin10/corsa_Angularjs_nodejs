@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">User profile</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+			<div class="col-md-4 text-center">
+              <img  ng-if="!DataModel.profile.photos" class="img-circle avatar avatar-original" style="-webkit-user-select:none;
+              display:block; margin:auto; width:150px; height:150px" ng-src="{{DataModel.profile.path + DataModel.profile.photo}}">
+              <img ng-if="DataModel.profile.photos" style="-webkit-user-select:none;
+             display:block; margin:auto; width:150px; height:150px" src="images/brand-07.png"  >
+            </div>
+
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-12">
+                  <h1 class="only-bottom-margin"><i class="fa fa-hand-o-right"></i>{{ DataModel.fullname}}</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                 <span class="text-muted"><i class="fa fa-envelope-o fa-fw"></i>Email:</span> {{DataModel.email}}<br>
+                 <span class="text-muted">Mobile:</span> {{DataModel.mobile}}<br>
+                  <span class="text-muted">Role:</span> {{DataModel.role}}<br>
+                  <h3><b>Verification </b></h3>
+                    <span class="text-muted">Mobile Verification:</span> {{DataModel.verification.mobile}}<br>
+                    <span class="text-muted">Email Verification:</span> {{DataModel.verification.email}}<br>
+                    <span class="text-muted">License Verification:</span> {{DataModel.verification.license}}<br>
+
+                  <h3><b>Driving License Details </b></h3>
+                  <div ng-if="DataModel.license.image.name">
+                  <span class="text-muted">Name</span> {{DataModel.license.name.first+DataModel.license.name.last}}<br>
+                  <span class="text-muted">Date Of Birth:</span> {{DataModel.license.dob | date :" MM/dd/y"}}<br>
+                  <span class="text-muted">Issue State:</span> {{DataModel.license.issuer.state}}<br>
+                  
+
+                 </div>
+                 <div ng-if="!DataModel.license.image.name">
+                  <span class="text-muted"> <h3>Not Avilable</h3></span>
+                 </div>
+                </div>
+                <!-- <div class="col-md-6">
+                  <div class="activity-mini">
+                    <i class="glyphicon glyphicon-comment text-muted"></i>
+                  </div>
+                  <div class="activity-mini">
+                    <i class="glyphicon glyphicon-thumbs-up text-muted"></i>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <hr><a class="btn btn-default pull-right" ui-sref="dashboard.edit({refId: DataModel._id})" ng-click= "editUser(DataModel._id)"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
